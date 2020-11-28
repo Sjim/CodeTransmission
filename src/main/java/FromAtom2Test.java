@@ -1,8 +1,8 @@
+import java.io.IOException;
 import java.util.Arrays;
-
 public class FromAtom2Test {
     //结果向量
-    private int[] selectVec;
+    public int[] selectVec;
     //可选择的覆盖路径或方法
     private final int[] pathToCover;
     //所有测试覆盖向量集
@@ -12,16 +12,18 @@ public class FromAtom2Test {
         pathToCover = p;
     }
 
-    private void select(){
+    public void select(){
         int[]pathLeft =Arrays.copyOf(pathToCover,pathToCover.length);
         int sizeOfTests = vecOfTests.length;
         selectVec = new int[sizeOfTests];
         for(int i = 0; i< sizeOfTests; i++) selectVec[i] = 0;
         int[][] temp = {pathLeft};
-        while(getMax(temp,pathLeft)>0){
+        int max = getMax(vecOfTests,pathToCover);
+        while(getMax(temp,pathToCover)>pathToCover.length-max){
             incGreed(pathLeft);
             temp = new int[][]{pathLeft};
         }
+        System.out.println();
     }
     /*
         the incGreed method to find tests
@@ -69,23 +71,11 @@ public class FromAtom2Test {
         }
         return max;
     }
-    private void print(int[] a){
+    public void print(int[] a){
         for (int i:
              a) {
             System.out.print(i+" ");
         }
     }
-    public static void main(String[] args){
-        int[][] vecOfTests = {
-                {1,0,0,0,0,1},
-                {0,1,1,0,0,0},
-                {1,1,1,1,0,0},
-                {0,0,0,0,1,1}
-        };
-        int[] pathToCover = {1,1,1,1,1,1};
-        FromAtom2Test fromAtom2Test = new FromAtom2Test(vecOfTests,pathToCover);
-        fromAtom2Test.select();
-        //输出测试选择结果 比如该测试用例结果输出 0 0 1 1即第3、4个测试用例
-        fromAtom2Test.print(fromAtom2Test.selectVec);
-    }
+
 }
