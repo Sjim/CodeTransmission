@@ -19,14 +19,15 @@ public class FromAtom2Test {
         for(int i = 0; i< sizeOfTests; i++) selectVec[i] = 0;
         int[][] temp = {pathLeft};
         int max = getMax(vecOfTests,pathToCover);
+
         while(getMax(temp,pathToCover)>pathToCover.length-max){
             incGreed(pathLeft);
+
             temp = new int[][]{pathLeft};
         }
         System.out.println();
     }
-    /*
-        the incGreed method to find tests
+    /*        the incGreed method to find tests
         增量贪心
         @param pathLeft
         the path left to cover
@@ -41,6 +42,8 @@ public class FromAtom2Test {
         for (int i = 0; i < vecOfTests.length; i++) {
             if(getSum(vecOfTests[i],pathLeft)==max){
                 selectVec[i] = 1;
+                System.out.print(i+": ");
+                print(vecOfTests[i]);
                 for (int j = 0; j < pathLeft.length; j++) {
                     if(vecOfTests[i][j]==1) pathLeft[j] = 0;
                 }
@@ -76,6 +79,7 @@ public class FromAtom2Test {
              a) {
             System.out.print(i+" ");
         }
+        System.out.println();
     }
 
 }

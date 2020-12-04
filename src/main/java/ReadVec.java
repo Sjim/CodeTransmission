@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.Arrays;
+
 import java.util.Objects;
 import java.util.Vector;
 
@@ -18,6 +19,7 @@ public class ReadVec {
                 for (File test:
                         Objects.requireNonNull(folder.listFiles())) {
                     if(test.getName().contains("Test")){
+                        //System.out.println(test.getName());
                         File fileOfBranch = new File(test.getPath()+"\\branch-vector.txt");
                         File fileOfMutation = new File(test.getPath()+"\\mutation-vector.txt");
                         Vector<Integer> branch = file2Vector(fileOfBranch);
